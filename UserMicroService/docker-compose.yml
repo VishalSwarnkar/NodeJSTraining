@@ -1,0 +1,22 @@
+version: "3"
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      WAIT_HOSTS: mongo:27017
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    volumes:
+      - ".${MONGO_DATA_DIR}:${MONGO_DATA_DIR}"
+    ports:
+      - "27017:27017"
+    expose:
+      - 27017
+    command: "mongod --logpath=${MONGO_LOG_FILE}"

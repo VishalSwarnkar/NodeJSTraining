@@ -1,0 +1,168 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Restaurant and restaurant Chart"
+    },
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/restaurants": {
+            "get": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "Finds restaurant tags",
+                "description": "Fetches all the restaurants from all the cities",
+                "operationId": "findrestaurantsByTags",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID restaurant"
+                    },
+                    "404": {
+                        "description": "restaurant not found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/restaurant": {
+            "get": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "Find a restaurant based on the criteria",
+                "description": "Enter parameters to find the right restaurant",
+                "operationId": "findrestaurant",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "restaurant object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "restaurant object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "description": "restaurant object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    },
+                    {
+                        "name": "budget",
+                        "in": "query",
+                        "description": "restaurant object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    },
+                    {
+                        "name": "cuisines",
+                        "in": "query",
+                        "description": "restaurant object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    },
+                    {
+                        "name": "menu",
+                        "in": "query",
+                        "description": "restaurant object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "Restaurant": {
+            "type": "object",
+            "properties": {
+                "restaurantId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "Amount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "City": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "restaurant"
+            }
+        },
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

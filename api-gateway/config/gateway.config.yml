@@ -1,0 +1,50 @@
+http:
+  port: 8080
+db:
+  redis:
+    host: mt.nodesense.ai
+    namespace: EGNS
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  api:
+    host: localhost
+    paths: "/ip"
+  orders-api:
+    host: localhost
+    paths: "/orders/"
+  
+    
+serviceEndpoints:
+  httpbin:
+    url: "https://httpbin.org"
+  restaurant-order-service-endpoints:
+    url: "http://localhost:3001/"
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  default:
+    apiEndpoints:
+      - api
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: httpbin
+              changeOrigin: true
+  restaurant-order-pipeline:
+    apiEndpoints:
+      - orders-api
+    policies:
+      - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: restaurant-order-service-endpoints
+              changeOrigin: true

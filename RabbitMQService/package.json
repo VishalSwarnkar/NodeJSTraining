@@ -1,0 +1,24 @@
+{
+  "name": "rabbitmqservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "na"
+  },
+  "keywords": [
+    "rabbitq"
+  ],
+  "author": "vishal",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemailer": "^4.7.0"
+  }
+}

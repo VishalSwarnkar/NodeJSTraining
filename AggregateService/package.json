@@ -1,0 +1,21 @@
+{
+  "name": "gatewayservice",
+  "version": "1.0.0",
+  "description": "external nodefetch",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Nun"
+  },
+  "keywords": [
+    "nodefetch"
+  ],
+  "author": "vishal",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}

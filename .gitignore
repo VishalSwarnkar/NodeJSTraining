@@ -1,0 +1,10 @@
+/consumerSubscriber/
+/gk
+/redisProject
+Session.txt
+some.js
+node_modules
+error.log
+info.log
+data.json
+package-lock.json

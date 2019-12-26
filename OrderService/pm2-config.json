@@ -1,0 +1,8 @@
+{
+    "apps" : [{
+      "name"        : "restaurant-service",
+      "script"      : "./app.js",
+      "watch"       : true
+    }
+]
+}

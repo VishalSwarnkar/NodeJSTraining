@@ -1,0 +1,29 @@
+version: "2"
+services:
+  order:
+    container_name: order
+    restart: always
+    build: .
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+  restaurant:
+    container_name: restaurant
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+  mongodb:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ../db:/data/db
+    ports:
+      - "27017:27017"
