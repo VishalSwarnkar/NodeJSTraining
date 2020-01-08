@@ -4,7 +4,7 @@ const orderSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     restaurantId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Restaurant',
+        ref: 'restaurants',
         required: true
     },
     quantity: {

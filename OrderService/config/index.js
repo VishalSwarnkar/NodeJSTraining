@@ -1,6 +1,7 @@
 require ('dotenv/config')
 
-export default {
-    MONGO_URL="mongodb://localhost:27017/node"
+module.exports = {
+    MONGO_URL: "mongodb://localhost:27017/node",
+    secret : "heymynameisvishalswarnkar"
 }
 

@@ -35,6 +35,6 @@ var Schema = mongoose.Schema;
   });
   
 
-var Restaurant = mongoose.model('Restaurant', restaurantSchema, 'Restaurant');
+var Restaurant = mongoose.model('restaurants', restaurantSchema);
 
 module.exports = Restaurant;

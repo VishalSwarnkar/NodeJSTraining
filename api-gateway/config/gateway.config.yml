@@ -13,14 +13,20 @@ apiEndpoints:
     paths: "/ip"
   orders-api:
     host: localhost
-    paths: "/orders/"
+    paths: "/api/orders/*"
+  restaurant-api:
+    - host: localhost
+      paths: "/restaurant*"
+
   
     
 serviceEndpoints:
   httpbin:
     url: "https://httpbin.org"
   restaurant-order-service-endpoints:
-    url: "http://localhost:3001/"
+    urls: 
+      - "http://localhost:3001/"
+      - "http://localhost:3000/"
 policies:
   - basic-auth
   - cors
@@ -42,8 +48,9 @@ pipelines:
   restaurant-order-pipeline:
     apiEndpoints:
       - orders-api
+      - restaurant-api
     policies:
-      - key-auth:
+      # - key-auth:
       - proxy:
           - action:
               serviceEndpoint: restaurant-order-service-endpoints

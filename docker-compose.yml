@@ -2,7 +2,7 @@ version: "3"
 services:
   restaurant:
     container_name: restaurant
-    build: ./Services
+    build: ./RestaurantService
     restart: always
     ports:
       - "3000:3000"
@@ -31,9 +31,12 @@ services:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/var/log/mongodb/mongodb.log
     volumes:
-      - "./data/db:/data/db"
+      - "mongodbdata:/data/db"
     ports:
       - "27017:27017"
     expose:
       - 27017
-    command: "mongod --logpath=/var/log/mongodb/mongodb.log"
+    command: "mongod"
+volumes:
+  mongodbdata:
+    external: true
