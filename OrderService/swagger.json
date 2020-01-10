@@ -5,7 +5,6 @@
     "title": "Restaurant and Order Chart"
   },
   "schemes": [
-    "https",
     "http"
   ],
   "paths": {
@@ -18,8 +17,13 @@
         "description": "Fetches all the Orders from all the cities",
         "operationId": "findordersByTags",
         "produces": [
-          "application/xml",
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "access-token"
+          }
         ],
         "responses": {
           "200": {
@@ -47,14 +51,16 @@
         "description": "Enter restaurant ID, total quantity, amount and city",
         "operationId": "addorder",
         "consumes": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "header",
+            "name": "access-token"
+          },
           {
             "in": "body",
             "name": "body",
@@ -66,6 +72,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
           "405": {
             "description": "Invalid input"
           }
@@ -81,17 +93,18 @@
         "description": "Returns a single order",
         "operationId": "getorderById",
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "parameters": [
           {
-            "name": "orderID",
+            "in": "header",
+            "name": "access-token"
+          },
+          {
+            "name": "orderId",
             "in": "path",
             "description": "ID of order return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
+            "required": true
           }
         ],
         "responses": {
@@ -113,27 +126,32 @@
         "tags": [
           "Order"
         ],
-        "summary": "Deletes a order",
+        "summary": "Update a order",
         "description": "",
-        "operationId": "deleteorder",
+        "operationId": "putorder",
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "parameters": [
           {
-            "name": "api_key",
             "in": "header",
-            "required": false,
-            "type": "string"
+            "name": "access-token"
           },
           {
             "name": "orderId",
             "in": "path",
-            "description": "order id to delete",
+            "description": "order id to update",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "order object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
           }
         ],
         "responses": {
@@ -149,27 +167,23 @@
         "tags": [
           "Order"
         ],
-        "summary": "Deletes a order",
+        "summary": "Delete a order",
         "description": "",
         "operationId": "deleteorder",
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "parameters": [
           {
-            "name": "api_key",
             "in": "header",
-            "required": false,
-            "type": "string"
+            "name": "access-token"
           },
           {
             "name": "orderId",
             "in": "path",
             "description": "order id to delete",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
@@ -182,14 +196,14 @@
         }
       }
     },
-    "/order/{restaurantId}/{city}": {
-      "post": {
+    "/orders/{restaurantId}/{city}": {
+      "get": {
         "tags": [
           "Order"
         ],
-        "summary": "uploads an image",
+        "summary": "get total order amount by city",
         "description": "",
-        "operationId": "uploadFile",
+        "operationId": "get order details by restaurant ID",
         "consumes": [
           "multipart/form-data"
         ],
@@ -202,11 +216,10 @@
             "in": "path",
             "description": "ID of order",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           {
-            "name": "City",
+            "name": "city",
             "in": "path",
             "description": "Additional data to pass to server",
             "required": false,
@@ -217,7 +230,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/ApiResponse"
+              "$ref": "#/definitions/OrderTotal"
             }
           }
         }
@@ -227,7 +240,7 @@
   "securityDefinitions": {
     "api_key": {
       "type": "apiKey",
-      "name": "api_key",
+      "name": "access-token",
       "in": "header"
     }
   },
@@ -236,8 +249,7 @@
       "type": "object",
       "properties": {
         "restaurantId": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
         "quantity": {
           "type": "integer",
@@ -250,9 +262,21 @@
         "City": {
           "type": "string"
         }
-      },
-      "xml": {
-        "name": "Order"
+      }
+    },
+    "OrderTotal": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "integer",
+          "format": "int32"
+        }
       }
     },
     "ApiResponse": {

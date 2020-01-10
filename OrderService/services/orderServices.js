@@ -128,7 +128,8 @@ var orders = {
                 res.setHeader('Content-Type', 'application/json');
                 res.status(200).json({
                     message: 'Order Updated',
-                    orderId: req.params.orderId
+                    orderId: req.params.orderId,
+                    OrderDetails: orders
                 });
             }, (err) => next(err))
             .catch((error) => {
@@ -142,11 +143,10 @@ var orders = {
     getOrdersDetailsByRestaurantCity: function (req, res, next) {
         Order.find({
             $and: [
-                { productId: req.params.restId }, { city: req.params.city }
+                { restaurantId: req.params.restId }, { city: req.params.city }
             ]
         })
             .then(result => {
-                console.log(result);
                 res.status(200).json({
                     counts: result.length,
                     city: req.params.city,

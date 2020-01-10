@@ -4,7 +4,7 @@ const logger = require('./logger');
 var path = require('path');
 const orderRoutes = require("./routes/order");
 require('dotenv').config();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const morgan = require('morgan');
@@ -27,7 +27,6 @@ connect.then((db)=>{
   logger.error('Unable to connect the DB', error);
 });
 
-// ====================================== Middle ware
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -36,10 +35,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // ============================= routers: =============================
 app.post('/authenticate', authentic.setToken);
-
 app.use('/api', route);
-route.use(authentic.authorization);
-route.use("/", orderRoutes);
+app.use("/", orderRoutes);
 
 
 // ============================= error handler
