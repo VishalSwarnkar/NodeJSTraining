@@ -5,7 +5,6 @@
         "title": "Restaurant and restaurant Chart"
     },
     "schemes": [
-        "https",
         "http"
     ],
     "paths": {
@@ -20,6 +19,12 @@
                 "produces": [
                     "application/xml",
                     "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "access-token"
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -47,14 +52,16 @@
                 "description": "Enter parameters to find the right restaurant",
                 "operationId": "findrestaurant",
                 "consumes": [
-                    "application/json",
-                    "application/xml"
-                ],
-                "produces": [
-                    "application/xml",
                     "application/json"
                 ],
+                "produces": [
+                    "application/xml"
+                ],
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "access-token"
+                    },
                     {
                         "name": "name",
                         "in": "query",

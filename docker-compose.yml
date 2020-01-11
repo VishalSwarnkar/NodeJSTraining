@@ -1,5 +1,13 @@
 version: "3"
 services:
+  rabbitque:
+    container_name: rabbitque
+    build: ./RabbitMQService
+    restart: always
+    ports: 
+      - "7777:7777"
+    expose:
+      - 7777
   restaurant:
     container_name: restaurant
     build: ./RestaurantService
@@ -24,6 +32,7 @@ services:
       - mongo
     links:
       - mongo
+      - rabbitque
   mongo:
     image: mongo
     container_name: "mongodb"

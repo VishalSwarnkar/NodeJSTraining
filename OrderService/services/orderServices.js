@@ -46,7 +46,7 @@ var orders = {
             city: req.body.city
         })
         order.save().then(result => {
-            fetch('http://localhost:7777/publisher', {
+            fetch('http://rabbitque:7777/publisher', {
                 method: 'post',
                 body: JSON.stringify(result, null, 2),
                 headers: { 'Content-Type': 'application/json' }

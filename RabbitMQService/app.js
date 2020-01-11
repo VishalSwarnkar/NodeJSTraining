@@ -1,7 +1,8 @@
 const express = require('express');
 const publish_router = require('./routes');
+require('dotenv').config();
 
-const PORT = 7777;
+const PORT = process.env.PORT|| 7777;
 var app = express();
 
 app.use(express.json());
@@ -9,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/",publish_router);
 
-app.listen(PORT, (res)=>{
+app.listen(PORT, '0.0.0.0', (res)=>{
     console.log("Listening the service at port :", PORT);
 })
 
