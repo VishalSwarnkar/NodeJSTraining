@@ -255,11 +255,11 @@
           "type": "integer",
           "format": "int32"
         },
-        "Amount": {
+        "amount": {
           "type": "integer",
           "format": "int32"
         },
-        "City": {
+        "city": {
           "type": "string"
         }
       }

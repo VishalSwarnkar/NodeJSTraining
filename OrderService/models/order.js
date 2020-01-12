@@ -17,7 +17,7 @@ const orderSchema = mongoose.Schema({
     city: {
         type: String
     },
-    orderDate: { type: Date}
+    orderDate: { type: Date, default: (new Date().toLocaleDateString('en-US'))}
 })
 
 module.exports = mongoose.model('Order', orderSchema, 'Order');

@@ -6,20 +6,21 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../app');
 let should = require('chai').should();
-
+const token = ''
 chai.use(chaiHttp);
 
 describe('Orders', () => {
     var order_id = "";
     it('POST: Should create order for food', (done) => {
         let orders = {
-            "productId": "5df39cedc1170b601f4054d5",
+            "restaurantId": "5df39cedc1170b601f4054d5",
             "quantity": "5",
             "amount": "1000",
             "city": "Faridkot"
         }
         chai.request(app)
             .post('/orders')
+            .set('access-token', token)
             .send(orders)
             .end((err, res) => {
                 if (err) done.fail(err);
@@ -39,6 +40,7 @@ describe('Orders', () => {
     it('Get: Should validate the schema', (done) => {
         chai.request(app)
             .get(`/orders/${order_id}`, { timeout: 3000 })
+            .set('access-token', token)
             .end((err, res) => {
                 if (err) done.fail(err);
                 res.body.should.be.a('object');
@@ -54,6 +56,7 @@ describe('Orders', () => {
     it('Get: Should return give record details', (done) => {
         chai.request(app)
             .get(`/orders/${order_id}`, { timeout: 3000 })
+            .set('access-token', token)
             .end((err, res) => {
                 if (err) done.fail(err);
                 res.status.should.equal(200);
@@ -66,6 +69,7 @@ describe('Orders', () => {
     it('Get: Should delete the order ID', (done) => {
         chai.request(app)
             .delete(`/orders/${order_id}`, { timeout: 3000 })
+            .set('access-token', token)
             .end((err, res) => {
                 if (err) done.fail(err);
                 res.status.should.equal(200);
